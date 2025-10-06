@@ -1,10 +1,7 @@
-// components/Playground.js
-"use client"; // <-- ADD THIS LINE
-
+"use client";
 import { useState } from 'react'
 
 export default function Playground({ apiKey }) {
-  // ... rest of the code is the same
   const [prompt, setPrompt] = useState('Hello, who are you?')
   const [response, setResponse] = useState('')
   const [loading, setLoading] = useState(false)
