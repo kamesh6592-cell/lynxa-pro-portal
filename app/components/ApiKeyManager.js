@@ -1,16 +1,18 @@
 // components/ApiKeyManager.js
+"use client"; // <-- ADD THIS LINE
+
 import { useState, useEffect } from 'react'
 import Playground from './Playground'
 import CurlCommand from './CurlCommand'
 
 export default function ApiKeyManager({ userId, userEmail }) {
+  // ... rest of the code is the same
   const [keys, setKeys] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
-  // Fetch user's keys when the component mounts
   useEffect(() => {
-    fetch('/api/user/keys') // This will call our backend API
+    fetch('/api/user/keys')
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch keys')
         return res.json()
@@ -27,7 +29,7 @@ export default function ApiKeyManager({ userId, userEmail }) {
 
   const handleGenerateKey = async () => {
     setError('')
-    const res = await fetch('/api/keys/generate', { // This calls our existing backend endpoint
+    const res = await fetch('/api/keys/generate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: userEmail, userId })
@@ -35,7 +37,6 @@ export default function ApiKeyManager({ userId, userEmail }) {
     const data = await res.json()
     if (data.success) {
       alert(`New Key Generated!\n\n${data.apiKey}\n\nKeep it safe!`)
-      // Refetch keys to show the new one in the list
       window.location.reload()
     } else {
       setError('Error: ' + data.error)
