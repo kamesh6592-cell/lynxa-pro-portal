@@ -1,16 +1,16 @@
 // app/dashboard/page.js
+"use client"; // <-- ADD THIS LINE
+
 import { useAuth, useUser } from '@clerk/nextjs'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-
-// We will create this component next
 import ApiKeyManager from '@/components/ApiKeyManager'
 
 export default function Dashboard() {
+  // ... rest of the code is the same
   const { isSignedIn, userId } = useAuth()
   const { user } = useUser()
 
-  // If the user is not signed in, show a message and a link to sign in
   if (!isSignedIn) {
     return (
       <div style={{ padding: '2rem', textAlign: 'center' }}>
