@@ -47,7 +47,7 @@ export default function KeysPage() {
     }
   };
 
-  if (!isSignedIn) return <div>Please sign in.</div>;
+  if (!isSignedIn) return <MainLayout><div>Please sign in.</div></MainLayout>;
 
   return (
     <MainLayout>
