@@ -1,7 +1,10 @@
 // components/Playground.js
+"use client"; // <-- ADD THIS LINE
+
 import { useState } from 'react'
 
 export default function Playground({ apiKey }) {
+  // ... rest of the code is the same
   const [prompt, setPrompt] = useState('Hello, who are you?')
   const [response, setResponse] = useState('')
   const [loading, setLoading] = useState(false)
@@ -10,7 +13,7 @@ export default function Playground({ apiKey }) {
     setLoading(true)
     setResponse('')
     try {
-      const res = await fetch('/api/lynxa', { // This calls our existing backend endpoint
+      const res = await fetch('/api/lynxa', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
