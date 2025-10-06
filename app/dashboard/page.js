@@ -1,36 +1,60 @@
 // app/dashboard/page.js
-"use client"; // <-- ADD THIS LINE
+"use client";
+import { MainLayout } from "@/components/MainLayout";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useUser } from "@clerk/nextjs";
 
-import { useAuth, useUser } from '@clerk/nextjs'
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import ApiKeyManager from '@/components/ApiKeyManager'
-
-export default function Dashboard() {
-  // ... rest of the code is the same
-  const { isSignedIn, userId } = useAuth()
-  const { user } = useUser()
-
-  if (!isSignedIn) {
-    return (
-      <div style={{ padding: '2rem', textAlign: 'center' }}>
-        <h1>Please Sign In</h1>
-        <p>You must be signed in to view your dashboard.</p>
-        <Link href="/sign-in">Sign In</Link>
-      </div>
-    )
-  }
+export default function DashboardPage() {
+  const { user } = useUser();
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '900px', margin: 'auto' }}>
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #eee', paddingBottom: '1rem', marginBottom: '2rem' }}>
-        <h1>Welcome, {user.firstName || user.username}!</h1>
-        <p><strong>Email:</strong> {user.primaryEmailAddress.emailAddress}</p>
-      </header>
-      
-      <main>
-        <ApiKeyManager userId={userId} userEmail={user.primaryEmailAddress.emailAddress} />
-      </main>
-    </div>
-  )
+    <MainLayout>
+      <div className="flex items-center justify-between space-y-2">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight">Dashboard</h2>
+          <p className="text-muted-foreground">
+            Welcome back, {user.firstName || user.username}!
+          </p>
+        </div>
+      </div>
+      <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Active Keys</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">2</div>
+            <p className="text-xs text-muted-foreground">+1 from last month</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">API Calls</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">1,234</div>
+            <p className="text-xs text-muted-foreground">+201 from last hour</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Tokens</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">57,321</div>
+            <p className="text-xs text-muted-foreground">+19% from last month</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Active Now</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">3</div>
+            <p className="text-xs text-muted-foreground">+1 since yesterday</p>
+          </CardContent>
+        </Card>
+      </div>
+    </MainLayout>
+  );
 }
