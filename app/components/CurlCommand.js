@@ -1,9 +1,8 @@
-// components/CurlCommand.js
 export default function CurlCommand({ apiKey }) {
   const command = `curl -X POST https://lynxa-pro-backend.vercel.app/api/lynxa \\
- -H "Content-Type: application/json" \\
- -H "Authorization: Bearer ${apiKey}" \\
- -d '{"message": "Hello, who are you?"}'`
+     -H "Content-Type: application/json" \\
+     -H "Authorization: Bearer ${apiKey}" \\
+     -d '{"message": "Hello, who are you?"}'`
 
   return (
     <section style={{ marginTop: '2rem' }}>
