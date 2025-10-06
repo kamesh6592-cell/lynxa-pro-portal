@@ -1,12 +1,9 @@
-// components/ApiKeyManager.js
-"use client"; // <-- ADD THIS LINE
-
+"use client";
 import { useState, useEffect } from 'react'
 import Playground from './Playground'
 import CurlCommand from './CurlCommand'
 
 export default function ApiKeyManager({ userId, userEmail }) {
-  // ... rest of the code is the same
   const [keys, setKeys] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
