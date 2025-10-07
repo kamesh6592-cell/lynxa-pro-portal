@@ -1,5 +1,5 @@
 // app/api/webhooks/clerk/route.js
-import { verifyWebhook } from '@clerk/nextjs/webhooks';
+import { verifyWebhook } from '@clerk/nextjs';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 
@@ -12,7 +12,6 @@ export async function POST(req) {
     });
     console.log('Webhook received:', evt.type, evt.data); // Log for debugging
     // Process event (e.g., sync to DB)
-    // Example: if (evt.type === 'user.created') { /* create user in DB */ }
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (err) {
     console.error('Webhook verification failed:', err.message);
